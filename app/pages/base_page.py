@@ -1,9 +1,11 @@
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 class BasePage(object):
-    browser = webdriver.Firefox()
-    browser.implicitly_wait(10)
+    browser = webdriver.Remote(
+           command_executor='http://192.168.0.10:4444/wd/hub',
+           desired_capabilities=DesiredCapabilities.CHROME)
     base_url = 'https://www.moo.com/uk'
 
     def get_browser(self):

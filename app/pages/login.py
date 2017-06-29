@@ -7,7 +7,6 @@ class Login(BasePage):
     VALID_EMAIL = "irinabucse.qa@gmail.com"
     VALID_PASSWD = "test12345"
     URL = "/account/signin.php"
-    LOGOUT_URL = "/account/signout.php"
 
     def log_in_as(self, username, password):
         """

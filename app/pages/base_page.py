@@ -9,6 +9,7 @@ class BasePage(object):
            command_executor='http://192.168.0.10:4444/wd/hub',
            desired_capabilities=DesiredCapabilities.CHROME)
     base_url = 'https://www.moo.com/uk'
+    LOGOUT_URL = "/account/signout.php"
 
     def get_browser(self):
         return self.browser

@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+from app.locators.login import LoginPageLocators
+
 
 class BasePage(object):
     browser = webdriver.Remote(
@@ -26,3 +28,17 @@ class BasePage(object):
 
     def find_element(self, selector, value):
         return self.browser.find_element(selector, value)
+
+    def get_source(self):
+        return self.browser.page_source
+
+    def get_error(self, selector, value):
+        el = self.find_parent(selector, value)
+        return el.find_element_by_class_name("has-error-msg").text
+
+    def find_parent(self, selector, value):
+        # return elem with class "col-7"
+        return self.find_element(selector, value).find_element(*LoginPageLocators.PARENT)
+
+    def logout(self):
+        self.visit(self.LOGOUT_URL)

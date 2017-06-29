@@ -3,8 +3,11 @@ from app.pages.base_page import BasePage
 
 
 class Login(BasePage):
-    def __init__(self):
-        self.URL = "/account/signin.php"
+
+    VALID_EMAIL = "irinabucse.qa@gmail.com"
+    VALID_PASSWD = "test12345"
+    URL = "/account/signin.php"
+    LOGOUT_URL = "/account/signout.php"
 
     def log_in_as(self, username, password):
         """
@@ -15,5 +18,13 @@ class Login(BasePage):
         self.find_element(*LoginPageLocators.PASSWORD_FIELD).send_keys(password)
         self.find_element(*LoginPageLocators.SUBMIT_BTN).click()
 
-    def get_source(self):
-        return self.browser.page_source
+    def logout(self):
+        self.visit(self.LOGOUT_URL)
+
+    def get_email_error(self):
+        return self.get_error(*LoginPageLocators.EMAIL_FIELD)
+
+    def get_password_error(self):
+        return self.get_error(*LoginPageLocators.PASSWORD_FIELD)
+
+
